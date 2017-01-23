@@ -13,7 +13,8 @@ class EmailSignUpForm extends React.Component {
       email: PropTypes.object,
       password: PropTypes.object,
       passwordConfirmation: PropTypes.object,
-      submit: PropTypes.object
+      submit: PropTypes.object,
+      name: PropTypes.object
     })
   };
 
@@ -22,7 +23,8 @@ class EmailSignUpForm extends React.Component {
     inputProps: {
       email: {},
       password: {},
-      submit: {}
+      submit: {},
+      name: {}
     }
   };
 
@@ -57,6 +59,16 @@ class EmailSignUpForm extends React.Component {
       <form className='redux-auth email-sign-up-form clearfix'
             style={{clear: "both", overflow: "hidden"}}
             onSubmit={this.handleSubmit.bind(this)}>
+
+        <Input type="text"
+               floatingLabelText="Name"
+               className="email-sign-up-name"
+               disabled={disabled}
+               value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "name"])}
+               errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "name"])}
+               onChange={this.handleInput.bind(this, "name")}
+               {...this.props.inputProps.name} />
+
         <Input type="text"
                floatingLabelText="Email"
                className="email-sign-up-email"
