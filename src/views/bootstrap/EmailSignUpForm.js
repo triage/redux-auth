@@ -11,6 +11,7 @@ class EmailSignUpForm extends React.Component {
     next: PropTypes.func,
     inputProps: PropTypes.shape({
       email: PropTypes.object,
+      name: PropTypes.object,
       password: PropTypes.object,
       passwordConfirmation: PropTypes.object,
       submit: PropTypes.object
@@ -22,7 +23,8 @@ class EmailSignUpForm extends React.Component {
     inputProps: {
       email: {},
       password: {},
-      submit: {}
+      submit: {},
+      name: {}
     }
   };
 
@@ -55,6 +57,17 @@ class EmailSignUpForm extends React.Component {
     return (
       <form className='redux-auth email-sign-up-form clearfix'
             onSubmit={this.handleSubmit.bind(this)}>
+
+        <Input type="text"
+               label="Name"
+               placeholder="Name"
+               groupClassName="email-sign-up-Name"
+               disabled={disabled}
+               value={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "form", "Name"])}
+               errors={this.props.auth.getIn(["emailSignUp", this.getEndpoint(), "errors", "Name"])}
+               onChange={this.handleInput.bind(this, "Name")}
+               {...this.props.inputProps.Name} />
+
         <Input type="text"
                label="Email"
                placeholder="Email"
